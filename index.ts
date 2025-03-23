@@ -77,15 +77,13 @@ console.log(`My ${Info} are ${FavGame}`);
 
 // const multiArray: readonly [string, boolean, string[], any[], null] = ['arsenal', false, ['henery', 'van-percy'], [405, 333], null];
 type Multi = readonly [string, boolean, string[], any[], null];
-const multiArray: Multi = ['arsenal', false, ['henery', 'van-percy'], [405, 333], null];
-console.log(multiArray);
-
-const [clubName, UCL, MVP, TotalGoals, EPL] = multiArray;
+const multiArray: Multi = ['arsenal', false, ['henry', 'van persie'], [405, 333], null];
+const [clubName, EPL, MVP, TotalGoals, UCL] = multiArray;
 console.log("clubName: " + clubName);
-console.log("UCL: " + UCL);
+console.log("EPL- 2008-2025 : " + EPL);
 console.log("MVP: " + MVP);
 console.log("TotalGoals: " + TotalGoals);
-console.log("EPL- 2008-2025 : " + EPL);
+console.log("UCL: " + UCL);
 
 // nested array
 const nestedArray: (number | string)[][] = [[1, 2, 3, 4,], [1, 'adfa', 3], ['ko', 'mumu', 'susu']]
