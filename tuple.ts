@@ -29,3 +29,15 @@ const [message, data] = fetchApi({ data: { name: 'test name', status: true }, me
 console.log(message);
 console.log(data.name, data.status);
 
+
+// tuples and types
+type myArray = readonly [string, number, number];
+const myExps: myArray = ['my Dev experience', 1, 2];
+const [myexp, from, to] = myExps
+console.log(`${myexp} is ${from} to ${to} years`);
+
+const myExp2: readonly [string, number, number] = ['my forntend exp', 3, 4]
+console.log(`${myExp2[0]} is ${myExp2[1]} to ${myExp2[2]} years`);
+
+
+

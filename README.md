@@ -255,3 +255,41 @@ const [message, data] = fetchApi({
 console.log(message);
 console.log(data.name, data.status);
 ```
+
+### Example: Using Enums in TypeScript
+
+This example demonstrates the use of enums in TypeScript to represent a set of named constants. The `GamePoint` enum is defined with three possible values: `WIN`, `LOSE`, and `DRAW`, each associated with a numeric value. A function `calcPoint` is implemented to calculate the total points based on the current game result and the existing total points. The function returns a tuple containing a descriptive string and the updated total points.
+
+Key points:
+
+- Enums provide a way to define a collection of related constants with meaningful names.
+- The `GamePoint` enum improves code readability and type safety by replacing magic numbers with descriptive names.
+- The `calcPoint` function demonstrates how to use enums in calculations and return structured data using tuples.
+
+### Summary and Conclusion
+
+Enums in TypeScript are a powerful feature for defining a set of named constants, making the code more readable and maintainable. By using enums, developers can avoid hardcoding values and reduce the risk of errors caused by using incorrect or inconsistent values. The `calcPoint` function showcases how enums can be integrated into calculations and combined with tuples to return structured and meaningful results. This approach enhances code clarity, type safety, and overall reliability.
+
+#### Conclusion
+
+enum is a great feature in TypeScript for defining named constants.
+
+Numeric enums support auto-increment and reverse mapping.
+
+String enums are more readable but don’t support reverse mapping.
+
+Union types ("Admin" | "User") can sometimes be a better alternative.
+
+```typescript
+enum GamePoint {
+  WIN = 3,
+  LOSE = 0,
+  DRAW = 1,
+}
+
+const calcPoint = (point: GamePoint, totalPoint: number): [string, number] => {
+  return ["total point", totalPoint + point];
+};
+const [myRes, total] = calcPoint(GamePoint.WIN, 44);
+console.log(`My team ${myRes} : ${total}`);
+```
