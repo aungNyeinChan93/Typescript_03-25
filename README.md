@@ -175,3 +175,27 @@ type LiteralType = "one" | 1 | true;
 let myLiteralType: LiteralType = "one";
 // myLiteralType = 2        // Type '2' is not assignable to type 'LiteralType'
 ```
+
+### Example: Using `as const` for Immutable Objects
+
+This example demonstrates the use of the `as const` assertion in TypeScript to make object properties immutable. The `ApiResponse` object is defined with `as const`, ensuring that its properties cannot be reassigned. A function `changeStatus` attempts to modify the `category` and `status` properties of `ApiResponse`, but TypeScript enforces immutability by throwing errors. This ensures that the object remains read-only and prevents unintended modifications.
+
+Key points:
+
+- `as const` makes all properties of an object immutable.
+- Attempting to reassign properties results in a TypeScript error.
+- The example highlights the importance of immutability for maintaining data integrity.
+
+```typescript
+// as const
+const ApiResponse = {
+  data: { name: "test api", category: "test category" },
+  status: true,
+} as const;
+const changeStatus = (responses: typeof ApiResponse): [string, boolean] => {
+  responses.data.category = "change category name"; // Cannot assign to 'category' because it is a read-only property.
+  responses.status = !responses.status; // Cannot assign to 'status' because it is a read-only property.
+  return [responses.data.category, responses.status];
+};
+console.log(changeStatus(ApiResponse));
+```

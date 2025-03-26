@@ -90,4 +90,21 @@ let myLiteralType: LiteralType = "one";
 // myLiteralType = 2        // Type '2' is not assignable to type 'LiteralType'
 
 
+let myPassword: '123123' = "123123"  // literial type strict
+
+
+// as const 
+const ApiResponse = {
+    data: { name: 'test api', category: 'test category' },
+    status: true
+} as const;
+const changeStatus = (responses: typeof ApiResponse): [string, boolean] => {
+    responses.data.category = 'change category name';   // Cannot assign to 'category' because it is a read-only property.
+    responses.status = !responses.status                // Cannot assign to 'status' because it is a read-only property.
+    return [responses.data.category, responses.status]
+}
+console.log(changeStatus(ApiResponse));
+
+
+
 
