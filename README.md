@@ -293,3 +293,82 @@ const calcPoint = (point: GamePoint, totalPoint: number): [string, number] => {
 const [myRes, total] = calcPoint(GamePoint.WIN, 44);
 console.log(`My team ${myRes} : ${total}`);
 ```
+
+
+### Example: Abstract Classes and Inheritance in TypeScript
+
+This example demonstrates the use of abstract classes and inheritance in TypeScript. The `Phone` abstract class serves as a blueprint for creating specific phone models, such as the `Iphone` class. Key features include public, protected, and private access modifiers, as well as methods for encapsulating and managing data.
+
+Key points:
+
+- The `Phone` class defines common properties (`brand`, `model`, `make`) and methods (`spec`, `getMake`, `setBrand`) for all phone types.
+- The `Iphone` class extends `Phone`, adding a `price` property and a `logBrand` method.
+- Access modifiers (`public`, `protected`, `private`) control the visibility and accessibility of class members.
+- The `readonly` modifier ensures that certain properties, like `model`, cannot be modified after initialization.
+- The `spec` method showcases how to access and display class properties, while the `setBrand` method demonstrates encapsulation by allowing controlled updates to the `brand` property.
+
+### Summary and Conclusion
+
+Abstract classes in TypeScript provide a powerful way to define reusable and extensible class structures. By using inheritance, developers can create specialized classes that build upon the functionality of abstract classes. This approach promotes code reuse, maintainability, and type safety.
+
+#### Conclusion
+
+- Abstract classes define a blueprint for derived classes.
+- Access modifiers (`public`, `protected`, `private`) and `readonly` enhance encapsulation and data integrity.
+- Inheritance allows for extending functionality while maintaining a clear and organized codebase.
+- This example highlights the importance of object-oriented principles in TypeScript for building scalable and maintainable applications.
+
+```typescript
+abstract class Phone {
+  public brand: string;
+  protected readonly model: number;
+  private make: string = "china";
+
+  public spec() {
+    console.log(`
+            Phone brand :${this.brand} ,
+            PhoneMOdel :${this.model} ,
+            Make by :${this.make}
+            `);
+  }
+
+  constructor(brand: string, model: number, make?: string) {
+    this.brand = brand;
+    this.model = model;
+    this.make = make ?? this.make;
+  }
+
+  public getMake() {
+    return this.make;
+  }
+
+  public setBrand(brand: string) {
+    this.brand = brand;
+  }
+}
+
+class Iphone extends Phone {
+  price: string | number;
+  constructor(
+    brand: string,
+    model: number,
+    price: string | number,
+    make?: string
+  ) {
+    super(brand, model, make);
+    this.price = price;
+  }
+  logBrand() {
+    console.log(this.model);
+  }
+}
+const iPhone_13 = new Iphone("Apple", 13, "700$");
+iPhone_13.setBrand("samsumg");
+
+iPhone_13.spec?.();
+console.log(iPhone_13);
+
+type IPhone = typeof iPhone_13;
+const myPhone: IPhone = new Iphone("mac", 14, "1000", "USA");
+console.log(myPhone);
+```
