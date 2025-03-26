@@ -294,7 +294,6 @@ const [myRes, total] = calcPoint(GamePoint.WIN, 44);
 console.log(`My team ${myRes} : ${total}`);
 ```
 
-
 ### Example: Abstract Classes and Inheritance in TypeScript
 
 This example demonstrates the use of abstract classes and inheritance in TypeScript. The `Phone` abstract class serves as a blueprint for creating specific phone models, such as the `Iphone` class. Key features include public, protected, and private access modifiers, as well as methods for encapsulating and managing data.
@@ -371,4 +370,57 @@ console.log(iPhone_13);
 type IPhone = typeof iPhone_13;
 const myPhone: IPhone = new Iphone("mac", 14, "1000", "USA");
 console.log(myPhone);
+```
+
+### Example: Using Interfaces and Type Composition in TypeScript
+
+This example demonstrates the use of interfaces and type composition in TypeScript to define and implement structured and reusable code. The `Log` interface specifies optional methods (`logger` and `print`) for logging and printing functionality. The `Methods` type is a generic type that accepts a type parameter `T` and defines a `methods` property of type `T`. The `One` type is created by combining the `Methods` type with the `Log` interface.
+
+Key points:
+
+- The `Log` interface defines a contract for objects that may include `logger` and `print` methods.
+- The `Methods` type uses generics to create a flexible structure for defining method containers.
+- The `One` type combines the `Methods` type with the `Log` interface, creating a reusable and extensible type.
+- The `one` object implements the `One` type, providing concrete implementations for the `logger` and `print` methods.
+- The `as const` assertion ensures that the `one` object is deeply immutable, preventing accidental modifications.
+
+### Summary and Conclusion
+
+This example highlights the power of interfaces and type composition in TypeScript for creating flexible and reusable code structures. By combining interfaces with generics, developers can define precise contracts and enforce type safety. The use of `as const` further enhances immutability, ensuring that objects remain consistent and predictable.
+
+#### Conclusion
+
+- Interfaces define contracts for object structures, promoting consistency and type safety.
+- Generics enable the creation of flexible and reusable types.
+- Type composition allows for combining multiple types into a single, cohesive structure.
+- Immutability with `as const` ensures data integrity and prevents unintended changes.
+- This approach is ideal for building scalable and maintainable TypeScript applications.
+
+```typescript
+interface Log {
+  logger?: () => void;
+  print?(): void;
+}
+
+type Methods<T> = {
+  methods: T;
+};
+
+type One = Methods<Log>;
+
+const one: One = {
+  methods: {
+    logger: () => {
+      console.log("this is logger ");
+    },
+    print() {
+      console.log(`this is print methods`);
+    },
+  },
+} as const;
+
+one.methods.logger?.();
+one.methods.print?.();
+
+type myNewType = typeof one;
 ```
