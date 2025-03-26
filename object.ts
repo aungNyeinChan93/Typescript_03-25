@@ -91,6 +91,9 @@ let myLiteralType: LiteralType = "one";
 
 
 let myPassword: '123123' = "123123"  // literial type strict
+const num: "num" = 'num'
+const num2 = 'num2' as const; //same literial type
+
 
 
 // as const 
@@ -99,11 +102,14 @@ const ApiResponse = {
     status: true
 } as const;
 const changeStatus = (responses: typeof ApiResponse): [string, boolean] => {
-    responses.data.category = 'change category name';   // Cannot assign to 'category' because it is a read-only property.
-    responses.status = !responses.status                // Cannot assign to 'status' because it is a read-only property.
+    // responses.data.category = 'change category name';   // Cannot assign to 'category' because it is a read-only property.
+    // responses.status = !responses.status                // Cannot assign to 'status' because it is a read-only property.
     return [responses.data.category, responses.status]
 }
 console.log(changeStatus(ApiResponse));
+
+
+
 
 
 

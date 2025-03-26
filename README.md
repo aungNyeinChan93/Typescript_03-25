@@ -186,6 +186,11 @@ Key points:
 - Attempting to reassign properties results in a TypeScript error.
 - The example highlights the importance of immutability for maintaining data integrity.
 
+🚀 Key Takeaways
+✔️ as const makes values deeply immutable.
+✔️ It infers literal types instead of broader types.
+✔️ It helps prevent accidental modifications and ensures type safety.
+
 ```typescript
 // as const
 const ApiResponse = {
@@ -198,4 +203,55 @@ const changeStatus = (responses: typeof ApiResponse): [string, boolean] => {
   return [responses.data.category, responses.status];
 };
 console.log(changeStatus(ApiResponse));
+```
+
+### Example: Using `readonly` with Tuples and Objects
+
+This example demonstrates the use of `readonly` with tuples and objects in TypeScript. It defines an `ApiData` type for API responses and a `fetchApi` function that returns a `readonly` tuple (`ApiResponse`). The tuple contains a message string and an object with `name` and `status` properties. The `readonly` keyword ensures that the returned tuple cannot be modified, promoting immutability and type safety.
+
+Key points:
+
+- `readonly` prevents modification of tuple elements.
+- The `fetchApi` function processes an API response and returns a structured, immutable tuple.
+- Destructuring is used to extract the message and data from the tuple.
+
+This approach ensures that the API response remains immutable, reducing the risk of unintended changes and improving code reliability.
+
+🎯🎯🎯 Key Takeaways
+
+Tuples have fixed types and lengths.
+
+By default, tuple elements can be modified in place.
+
+Adding readonly ensures the tuple cannot be changed after creation.
+
+Immutability leads to better safety, predictability, and optimizations in code.
+
+```typescript
+type ApiData = {
+  data: {
+    name: string;
+    status: boolean;
+  };
+  message: string;
+};
+
+type ApiResponse = readonly [
+  string,
+  { readonly name: string; readonly status: boolean }
+];
+
+const fetchApi = (response: ApiData): ApiResponse => {
+  return [
+    response.message,
+    { name: response.data.name, status: response.data.status },
+  ];
+};
+
+const [message, data] = fetchApi({
+  data: { name: "test name", status: true },
+  message: "success",
+});
+console.log(message);
+console.log(data.name, data.status);
 ```
