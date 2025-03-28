@@ -1,4 +1,4 @@
-__## Typescript 03/25
+\_\_## Typescript 03/25
 
 ### Example: type
 
@@ -423,4 +423,54 @@ one.methods.logger?.();
 one.methods.print?.();
 
 type myNewType = typeof one;
+```
+
+### Example: Dependency Injection with Interfaces in TypeScript
+
+This example demonstrates the use of dependency injection and interfaces in TypeScript to achieve flexibility and adherence to the SOLID principles. The `PayPal` interface defines a contract for payment processing, ensuring that any class or object implementing it provides a `payment` method. The `PaymentProcessor` class implements the `PayPal` interface, while the `somethingPayment` function accepts any object conforming to the `PayPal` interface, enabling loose coupling between components.
+
+Key points:
+
+- The `PayPal` interface defines a standard for payment processing, promoting consistency and type safety.
+- The `PaymentProcessor` class implements the `PayPal` interface, providing a concrete implementation of the `payment` method.
+- The `somethingPayment` function demonstrates dependency injection by accepting any object that adheres to the `PayPal` interface, allowing for flexible and reusable code.
+- This approach adheres to the Dependency Inversion Principle (DIP) of SOLID, as high-level modules depend on abstractions rather than concrete implementations.
+
+### Summary and Conclusion
+
+This example highlights the importance of dependency injection and interfaces in TypeScript for creating flexible, reusable, and maintainable code. By defining contracts with interfaces and injecting dependencies, developers can decouple components, making the codebase easier to extend and test.
+
+#### Conclusion
+
+- Interfaces define contracts that ensure consistency and type safety.
+- Dependency injection promotes loose coupling and reusability.
+- Adhering to the Dependency Inversion Principle (DIP) improves code maintainability and scalability.
+- This approach is ideal for building robust and scalable TypeScript applications that follow the SOLID principles.
+
+```typescript
+interface PayPal {
+  payment: (amount: number) => void;
+}
+
+class PaymentProcessor implements PayPal {
+  payment(amount: number): void {
+    console.log(`payment amount is ${amount}`);
+  }
+}
+
+const somethingPayment = (
+  processor: PaymentProcessor | PayPal,
+  amount: number
+) => {
+  processor.payment(amount);
+};
+
+const paypal: PayPal = {
+  payment(amount: number) {
+    console.log("Paypal  :", amount);
+  },
+};
+
+somethingPayment(new PaymentProcessor(), 10000);
+somethingPayment(paypal, 500);
 ```

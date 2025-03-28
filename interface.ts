@@ -109,7 +109,6 @@ const [p_name, cpu] = productName([product_one, product_two, p3])
 console.log(`${p_name} are ${cpu}`)
 
 //
-
 interface BaseApiResponse<Data> {
     message: string;
     status: number;
@@ -117,30 +116,78 @@ interface BaseApiResponse<Data> {
 }
 
 type MovieResponse = {
-    movieName:string,
+    movieName: string,
     rate: number,
 }
-const singleMovieRes1:MovieResponse ={
-    movieName:"Three Body Problem",
-    rate:8.8
+const singleMovieRes1: MovieResponse = {
+    movieName: "Three Body Problem",
+    rate: 8.8
 }
 
-const movieApi:BaseApiResponse<MovieResponse> ={
-    message:'success',
-    status:200,
-    data:singleMovieRes1
+const movieApi: BaseApiResponse<MovieResponse> = {
+    message: 'success',
+    status: 200,
+    data: singleMovieRes1
 }
 console.log(movieApi)
 
-const userApi:BaseApiResponse<any> ={
-    message:'success',
-    status:200,
-    data:{
-        name:'natalia',
-        age :23
+const userApi: BaseApiResponse<any> = {
+    message: 'success',
+    status: 200,
+    data: {
+        name: 'natalia',
+        age: 23
     }
 }
 console.log(userApi)
+
+// 
+interface UserInfo {
+    name: string,
+    age: number,
+
+    getInfo(): void
+}
+
+const user1: UserInfo = {
+    name: 'John Doe',
+    age: 30,
+    getInfo: () => {
+        console.log(`My name is ${user1.name}. I am ${user1.age} years old.`)
+    }
+}
+
+const testing = (user: UserInfo): void => {
+    user?.getInfo();
+}
+testing(user1);
+
+
+// payment (solid) Dependency Injection
+interface PayPal {
+    payment: (amount: number) => void,
+}
+
+class PaymentProcessor implements PayPal {
+    payment(amount: number): void {
+        console.log(`payment amount is ${amount}`);
+    }
+}
+
+const somethingPayment = (processor :PaymentProcessor|PayPal,amount:number) => {
+    processor.payment(amount);
+}
+
+const paypal:PayPal = {
+    payment(amount: number) {
+        console.log('Paypal  :', amount);
+    }
+}
+
+somethingPayment(new PaymentProcessor(), 10000);
+somethingPayment(paypal, 500);
+
+
 
 
 
