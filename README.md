@@ -474,3 +474,47 @@ const paypal: PayPal = {
 somethingPayment(new PaymentProcessor(), 10000);
 somethingPayment(paypal, 500);
 ```
+
+### Example: Summary and Conclusion
+
+This example demonstrates the use of `for...in` and `for...of` loops in TypeScript for iterating over objects and arrays, respectively. It also showcases the creation of a custom utility type `MyReadOnly` to make all properties of a given type `readonly`. The `MyReadOnly` type uses mapped types and the `readonly` modifier to enforce immutability.
+
+Key points:
+
+- The `for...in` loop is used to iterate over the keys of an object, while the `for...of` loop is used to iterate over the values of an array.
+- The `@ts-ignore` directive is used to suppress TypeScript errors when accessing object properties dynamically.
+- The `MyReadOnly` utility type demonstrates how to create a mapped type that makes all properties of a type immutable.
+- Attempting to modify properties of a `readonly` object results in a TypeScript error, ensuring data integrity.
+
+#### Conclusion
+
+- `for...in` is ideal for iterating over object keys, while `for...of` is suited for array values.
+- Custom utility types like `MyReadOnly` enhance type safety and immutability in TypeScript.
+- Enforcing immutability helps prevent unintended modifications and promotes robust code.
+- This approach is useful for scenarios where data integrity and consistency are critical.
+
+```typescript
+for (let key in myMonster2) {
+  //for in loop for OBJ
+  //@ts-ignore
+  console.log(`${key} : ${myMonster2[key]}`);
+}
+
+for (let value of [1, 22, 32, 4]) {
+  console.log(value);
+}
+
+type MyReadOnly<T> = {
+  readonly [k in keyof T]: T[k];
+};
+
+type as = {
+  name: string;
+  age: number;
+};
+const as1: MyReadOnly<as> = {
+  name: "natalia",
+  age: 23,
+};
+// as1.name = 'natalia 2'; // TS2540: Cannot assign to name because it is a read-only property.
+```
