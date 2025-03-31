@@ -73,13 +73,14 @@ abstract class Vehicle {
         return this.services;
     }
 
+    set _services(service: Service<{ name: string, type: string }>) {
+        this.services.push(service)
+    }
+
     get _services(): Service<{ name: string, type: string }>[] {
         return this.services
     }
 
-    set _services(service: Service<{ name: string, type: string }>) {
-        this.services.push(service)
-    }
 }
 
 class Car extends Vehicle {
